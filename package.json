@@ -7,7 +7,7 @@
     "dev": "vite",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test-storybook": "vitest --project=storybook"
+    "test-storybook": "vitest --project=storybook --coverage"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",
