@@ -170,8 +170,9 @@ export class AuthLogin extends LitElement {
                         .disabled=${this.loading}
                         variant="primary"
                         class="w-full"
-                        label="${this.loading ? '로그인 중...' : '로그인'}"
-                    ></ui-button>
+                    >
+                        ${this.loading ? '로그인 중...' : '로그인'}
+                    </ui-button>
                 </form>
             </div>
         `;

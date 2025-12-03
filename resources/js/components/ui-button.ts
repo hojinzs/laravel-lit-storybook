@@ -74,6 +74,7 @@ const styles = css`
 @customElement('ui-button')
 export class UIButton extends LitElement {
     static styles = [styles];
+    static formAssociated = true
 
     @property({type: String})
     declare variant: 'primary' | 'success' | 'secondary' | 'danger';

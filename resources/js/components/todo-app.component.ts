@@ -1,18 +1,16 @@
 import {html, LitElement} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
-import appCss from './todo-app.css?inline';
-import {api} from './api';
+// import appCss from './todo-app.styles.ts?inline';
+import {api as apiImport} from './api';
+import { styles } from "./todo-app.styles.ts"
 import type {Todo} from './api';
 import './todo-input';
 import './todo-list';
 import './ui-button';
 
-const sheet = new CSSStyleSheet();
-sheet.replaceSync(appCss);
-
 @customElement('todo-app')
-export class TodoApp extends LitElement {
-    static styles = [sheet];
+export class TodoAppComponent extends LitElement {
+    static styles = [styles];
 
     @state()
     declare todos: Todo[];
@@ -23,7 +21,7 @@ export class TodoApp extends LitElement {
     @state()
     declare error: string;
 
-    constructor() {
+    constructor(private readonly api = apiImport) {
         super();
         this.todos = [];
         this.loading = false;
@@ -43,7 +41,7 @@ export class TodoApp extends LitElement {
     private async fetchTodos(): Promise<void> {
         this.loading = true;
         try {
-            const { todos } = await api.listTodos();
+            const { todos } = await this.api.listTodos();
             this.todos = todos;
         } catch (error) {
             console.error(error);
@@ -57,7 +55,7 @@ export class TodoApp extends LitElement {
         const { title } = e.detail;
         this.loading = true;
         try {
-            const { todo } = await api.createTodo(title);
+            const { todo } = await this.api.createTodo(title);
             this.todos = [todo, ...this.todos];
         } catch (error) {
             console.error(error);
@@ -70,7 +68,7 @@ export class TodoApp extends LitElement {
     private async onToggle(e: CustomEvent) {
         const { id, completed } = e.detail;
         try {
-            const { todo } = await api.toggleTodo(id, completed);
+            const { todo } = await this.api.toggleTodo(id, completed);
             this.todos = this.todos.map((t) => (t.id === id ? todo : t));
         } catch (error) {
             console.error(error);
@@ -85,7 +83,7 @@ export class TodoApp extends LitElement {
             return;
         }
         try {
-            await api.deleteTodo(id);
+            await this.api.deleteTodo(id);
             this.todos = this.todos.filter((t) => t.id !== id);
         } catch (error) {
             console.error(error);

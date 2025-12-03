@@ -9,6 +9,7 @@ const styles = css`
         width: 100%;
         border-radius: 12px;
         border: 1px solid #e2e8f0;
+        box-sizing: border-box;
         background: #f8fafc;
         padding: 12px 14px;
         font-size: 14px;
@@ -29,6 +30,7 @@ const styles = css`
 @customElement('ui-text-input')
 export class UITextInput extends LitElement {
     static styles = [styles];
+    static formAssociated = true
 
     @property({type: String})
     declare value: string;
