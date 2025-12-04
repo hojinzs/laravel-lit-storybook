@@ -1,3 +1,6 @@
+import {css} from 'lit';
+
+export const todoItemStyles = css`
 .item {
     display: flex;
     align-items: center;
@@ -24,3 +27,4 @@
     width: 16px;
     height: 16px;
 }
+`;

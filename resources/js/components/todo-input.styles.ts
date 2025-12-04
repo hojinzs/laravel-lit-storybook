@@ -1,0 +1,16 @@
+import {css} from 'lit';
+
+export const todoInputStyles = css`
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+        .form {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+`;

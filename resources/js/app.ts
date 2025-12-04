@@ -1,5 +1,5 @@
 import './bootstrap';
-import './components/todo-app.component.ts';
+import './components/todo-app';
 import './components/auth-login';
 import './components/todo-input';
 import './components/todo-list';

@@ -4,12 +4,12 @@ import {customElement, state} from 'lit/decorators.js';
 import {api as apiImport} from './api';
 import { styles } from "./todo-app.styles.ts"
 import type {Todo} from './api';
-import './todo-input';
+import './todo-input.component.ts';
 import './todo-list';
 import './ui-button';
 
 @customElement('todo-app')
-export class TodoAppComponent extends LitElement {
+export class TodoApp extends LitElement {
     static styles = [styles];
 
     @state()

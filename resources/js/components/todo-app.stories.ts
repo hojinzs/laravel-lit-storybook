@@ -1,6 +1,6 @@
 import {html} from 'lit';
 import type {Meta, StoryObj} from '@storybook/web-components';
-import { TodoAppComponent } from './todo-app.component.ts';
+import { TodoApp } from './todo-app.component.ts';
 import type { Todo } from './api';
 import { expect } from 'storybook/test';
 import { within } from "shadow-dom-testing-library"
@@ -119,7 +119,7 @@ const mockApi = (() => {
 })()
 
 // Storybook용 커스텀 컴포넌트 등록
-customElements.define('todo-app-story', class extends TodoAppComponent {
+customElements.define('todo-app-story', class extends TodoApp {
     constructor() {
         super(mockApi);
     }

@@ -1,6 +1,6 @@
 import {html} from 'lit';
 import type {Meta, StoryObj} from '@storybook/web-components';
-import './todo-input';
+import './todo-input.component';
 
 type Args = {
     loading: boolean;

@@ -1,3 +1,6 @@
+import {css} from 'lit';
+
+export const authLoginStyles = css`
 .card {
     width: 100%;
     max-width: 420px;
@@ -40,3 +43,4 @@
     padding: 10px 12px;
     font-size: 13px;
 }
+`;
