@@ -1,7 +1,7 @@
 import {html, LitElement} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {authLoginStyles} from './auth-login.styles';
-import {api} from '../libs/api';
+import {api as apiImport} from '../libs/api';
 import './ui-text-input';
 import './ui-button';
 
@@ -53,7 +53,7 @@ export class AuthLogin extends LitElement {
     @query('input.native-submit')
     declare nativeSubmit: HTMLInputElement | null;
 
-    constructor() {
+    constructor(private readonly api = apiImport) {
         super();
         this.email = '';
         this.password = '';
@@ -104,7 +104,7 @@ export class AuthLogin extends LitElement {
         this.loading = true;
         this.error = '';
         try {
-            await api.login(this.email, this.password);
+            await this.api.login(this.email, this.password);
             window.location.assign(this.redirectTo || '/');
         } catch (error) {
             console.error(error);
