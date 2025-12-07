@@ -10,10 +10,13 @@ const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(file
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [laravel({
-    input: ['resources/css/app.css', 'resources/js/app.ts'],
-    refresh: true
-  }), tailwindcss()],
+  plugins: [
+    laravel({
+      input: ['resources/css/app.css', 'resources/js/app.ts'],
+      refresh: true
+    }), 
+    tailwindcss()
+  ],
   test: {
     projects: [{
       extends: true,

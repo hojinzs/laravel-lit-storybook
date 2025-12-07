@@ -25,3 +25,5 @@ jobs:
 
       - name: Run Storybook tests
         run: npm run test-storybook
+        env:
+            LARAVEL_BYPASS_ENV_CHECK: 1
