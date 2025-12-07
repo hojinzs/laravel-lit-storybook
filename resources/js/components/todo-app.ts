@@ -5,3 +5,5 @@ declare global {
         'todo-app': TodoApp;
     }
 }
+
+export { TodoApp };

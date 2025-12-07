@@ -1,7 +1,7 @@
 import {html, LitElement} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {authLoginStyles} from './auth-login.styles';
-import {api} from './api';
+import {api} from '../libs/api';
 import './ui-text-input';
 import './ui-button';
 

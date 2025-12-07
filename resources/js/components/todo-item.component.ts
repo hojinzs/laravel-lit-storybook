@@ -1,7 +1,7 @@
 import {html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {todoItemStyles} from './todo-item.styles';
-import type {Todo} from './api';
+import type {Todo} from '../libs/api';
 import './ui-button';
 
 @customElement('todo-item')

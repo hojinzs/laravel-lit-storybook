@@ -1,7 +1,7 @@
 import {html} from 'lit';
 import type {Meta, StoryObj} from '@storybook/web-components';
 import { TodoApp } from './todo-app.component.ts';
-import type { Todo } from './api';
+import type { Todo } from '../libs/api.ts';
 import { expect } from 'storybook/test';
 import { within } from "shadow-dom-testing-library"
 

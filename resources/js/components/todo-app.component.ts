@@ -1,10 +1,10 @@
 import {html, LitElement} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 // import appCss from './todo-app.styles.ts?inline';
-import {api as apiImport} from './api';
+import {api as apiImport} from '../libs/api.ts';
 import { styles } from "./todo-app.styles.ts"
-import type {Todo} from './api';
-import './todo-input.component.ts';
+import type {Todo} from '../libs/api.ts';
+import './todo-input';
 import './todo-list';
 import './ui-button';
 

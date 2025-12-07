@@ -1,59 +1,228 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Storybook Example
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+이 프로젝트는 Laravel 12와 Web Components(Lit)를 활용한 모던 웹 애플리케이션 개발 예제입니다. Storybook을 도입하여 컴포넌트 주도 개발(CDD) 환경을 구축하고, 인터랙션 테스트와 CI/CD 파이프라인까지 통합된 모범 사례를 제시합니다.
 
-## About Laravel
+## Tech Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Backend**: Laravel 12 (PHP 8.2+)
+- **Frontend**: Lit 3 (Web Components), TailwindCSS 4
+- **Build Tool**: Vite 7
+- **Component Development**: Storybook 8
+- **Testing**:
+    - Backend: Pest 4
+    - Frontend: Vitest 4
+- **Language**: TypeScript
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Preview
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [Storybook Demo](https://hojinzs.github.io/laravel-lit-storybook)
 
-## Learning Laravel
+## Getting Started
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+이 프로젝트를 로컬 환경에서 실행하는 방법입니다.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Prerequisites (사전 요구사항)
 
-## Laravel Sponsors
+- PHP 8.2 이상
+- Composer
+- Node.js 22.x 이상
+- npm 10.x 이상
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Installation (설치 및 실행)
 
-### Premium Partners
+1. **프로젝트 클론**
+   ```bash
+   git clone <repository-url>
+   cd storybook-example
+   ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. **Backend 의존성 설치 및 설정**
+   ```bash
+   composer install
+   cp .env.example .env
+   php artisan key:generate
+   touch database/database.sqlite # SQLite 사용 시
+   php artisan migrate
+   ```
 
-## Contributing
+3. **Frontend 의존성 설치**
+   ```bash
+   npm install
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **개발 서버 실행**
+   Laravel 서버와 Vite 개발 서버를 동시에 실행합니다.
+   ```bash
+   npm run dev
+   ```
+   또는 각각 실행:
+   ```bash
+   php artisan serve
+   ```
+   ```bash
+   php artisan serve
+   npm run storybook # Storybook 실행
+   ```
 
-## Code of Conduct
+## Guide: Adding Storybook to Laravel
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+이 저장소와 같이 Laravel 프로젝트에 Storybook을 처음부터 설정하는 방법입니다.
 
-## Security Vulnerabilities
+### 0. Laravel 프로젝트 생성
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+laravel new lit-project
+cd lit-project
+```
 
-## License
+### 1. Web Component (Lit) 설치
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+프로젝트 루트 디렉토리에서 다음 명령어를 실행하여 lit을 설치합니다.
+
+```bash
+npm install lit
+```
+
+Storybook 에서는 `package.json`의 의존성을 보고 라이브러리에 맞는 renderer를 자동으로 설치합니다. `lit`이나 `react` 같은 라이브러리가 설치되어 있어야 Storybook이 정상적으로 초기화됩니다.
+
+### 2. Storybook 설치
+
+프로젝트 루트 디렉토리에서 다음 명령어를 실행합니다.
+
+```bash
+npx storybook@latest init
+```
+
+### 3. Storybook 디렉토리 설정 수정
+
+Storybook이 설치되면 두 개의 폴더가 생성됩니다.
+
+1. `.storybook`: Storybook 설정 파일 디렉토리
+2. `stories`: 예제 컴포넌트와 문서 디렉토리
+
+Laravel의 구조에 맞게 리소스를 관리하기 위해 `.storybook/main.ts` (또는 .js) 파일을 수정하여 `resources/js` 디렉토리를 바라보도록 설정합니다.
+
+```javascript
+const config = {
+    // ...
+    "stories": [
+        "../resources/js/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    ],
+    // ...
+}
+```
+
+### 4. Storybook 실행
+
+```bash
+npm run storybook
+```
+
+브라우저에서 `http://localhost:6006`으로 접속하여 Storybook을 확인할 수 있습니다.
+
+## Development Workflow
+
+### Storybook
+
+컴포넌트 개발 및 문서는 Storybook을 통해 관리됩니다.
+
+```bash
+npm run storybook
+```
+- 브라우저에서 `http://localhost:6006` 접속
+- 스토리 파일 위치: `resources/js/**/*.stories.ts`
+
+### Testing
+
+**Frontend (Component & Logic)**
+Vitest를 사용하여 컴포넌트와 유틸리티를 테스트합니다.
+```bash
+npx vitest
+```
+
+**Backend (Laravel)**
+Pest를 사용하여 API 및 백엔드 로직을 테스트합니다.
+```bash
+php artisan test
+```
+
+## Project Structure
+
+주요 디렉토리 구조는 다음과 같습니다.
+
+```
+├── app/                  # Laravel Core Code
+├── resources/
+│   ├── js/
+│   │   ├── components/   # Lit Web Components & Stories
+│   │   └── app.ts        # Entry Point
+├── .storybook/           # Storybook Configuration
+└── tests/                # Pest & Vitest Tests
+```
+
+---
+
+## About This Example (구현 가이드)
+
+본 프로젝트가 어떻게 구성되었는지에 대한 상세 설명입니다.
+
+### 1. Web Component (Lit) & Storybook Integration
+React/Vue 대신 표준 Web Component 기술인 **Lit**을 사용하여 프레임워크 의존성을 낮추고 성능을 최적화했습니다. Storybook은 `package.json`의 의존성을 분석하여 자동으로 `@storybook/web-components-vite` 빌더를 구성합니다.
+
+### 2. Features
+
+- **TypeScript Support**: 모든 컴포넌트와 스토리는 TypeScript로 작성되어 타입 안정성을 보장합니다.
+- **Interaction Testing**: Storybook의 `play` 함수를 활용하여 컴포넌트 내부 동작(클릭, 입력 등)을 테스트합니다.
+- **API Mocking Strategy**: 외부 의존성(API 등)을 직접 import 하지 않고, **의존성 주입(Dependency Injection)** 패턴을 사용하여 테스트 용이성을 높였습니다. 
+    - [상세 구현 보기: Interaction Testing API Mocking](#interaction-testing-api-mocking)
+
+### 3. CI/CD
+
+GitHub Actions를 통해 코드 품질을 관리합니다.
+- **Test Workflow**: `.github/workflows/storybook_test.yml` (Vitest 실행)
+- **Deployment**: `.github/workflows/storybook.yml` (GitHub Pages 배포)
+
+---
+
+### Interaction Testing API Mocking (상세)
+
+예제 코드: [todo-app.component.ts](/resources/js/components/todo-app.component.ts)
+
+Storybook에서 API 호출 없이 컴포넌트의 인터랙션 테스트를 할 수 있습니다.
+
+#### API Mocking
+
+Storybook에서 API 모킹은 일반적으로 [msw](https://mswjs.io/)를 권장합니다. 하지만 msw를 이용한 모킹은 vitest 환경에서는 별도의 설정이 필요하고 복잡해질 수 있습니다. 이 프로젝트에서는 **WEB Component에 API 객체를 주입(Injection)**하는 단순하고 강력한 방법을 사용합니다.
+
+```typescript
+// 컴포넌트 정의 (API를 생성자 인자로 받음)
+export class TodoApp extends HTMLElement {
+    constructor(private api: ApiClient = defaultApi) {
+        super();
+        this.attachShadow({ mode: 'open' });
+    }
+    // ...
+}
+```
+
+```typescript
+// Storybook용 Mock 주입
+customElements.define('todo-app-story', class extends TodoApp {
+    constructor() {
+        super(mockApi); // Mock API 주입
+    }
+});
+
+const meta: Meta<Args> = {
+    title: 'Todo/App',
+    component: 'todo-app-story',
+    render: () => html`<todo-app-story></todo-app-story>`
+};
+```
+
+## Contact
+
+프로젝트 관련 문의는 github issue에 남겨주세요.
+
+- Author: [hojinzs](https://github.com/hojinzs)
+- Blog: https://blog.moncher.xyz
