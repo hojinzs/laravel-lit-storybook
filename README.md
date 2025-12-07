@@ -192,14 +192,13 @@ Storybook에서 API 호출 없이 컴포넌트의 인터랙션 테스트를 할 
 
 #### API Mocking
 
-Storybook에서 API 모킹은 일반적으로 [msw](https://mswjs.io/)를 권장합니다. 하지만 msw를 이용한 모킹은 vitest 환경에서는 별도의 설정이 필요하고 복잡해질 수 있습니다. 이 프로젝트에서는 **WEB Component에 API 객체를 주입(Injection)**하는 단순하고 강력한 방법을 사용합니다.
+Storybook에서 API 모킹은 일반적으로 [msw](https://mswjs.io/)를 권장합니다. 하지만 msw를 이용한 모킹은 vitest 환경에서는 별도의 설정이 필요하고 복잡해질 수 있습니다. 이 프로젝트에서는 WEB Component에 API 객체를 주입(Injection)하는 단순하고 강력한 방법을 사용합니다.
 
 ```typescript
 // 컴포넌트 정의 (API를 생성자 인자로 받음)
 export class TodoApp extends HTMLElement {
     constructor(private api: ApiClient = defaultApi) {
         super();
-        this.attachShadow({ mode: 'open' });
     }
     // ...
 }
