@@ -199,7 +199,6 @@ Storybook에서 API 모킹은 일반적으로 [msw](https://mswjs.io/)를 권장
 export class TodoApp extends HTMLElement {
     constructor(private api: ApiClient = defaultApi) {
         super();
-        this.attachShadow({ mode: 'open' });
     }
     // ...
 }
